@@ -1,0 +1,30 @@
+// _nav.scss
+
+.top-nav {
+  border-bottom: 2px solid $color-black;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.inner-nav {
+  @include outer-container();
+
+  .nav-item {
+    display: inline-block;
+  }
+
+  .nav-item__search {
+    display: inline-block;
+    float: right;
+  }
+
+  .nav-item__has-sublist {
+
+  }
+
+  .nav-item__link {
+    color: pink;
+  }
+
+
+}

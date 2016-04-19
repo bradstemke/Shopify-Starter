@@ -1,0 +1,7 @@
+// _header.scss
+
+.site-header {
+  .inner-header {
+    @include outer-container();
+  }
+}

@@ -1,0 +1,51 @@
+// _variables.scss
+
+////////////////////////////////////////////////////////
+// Variables: Global
+////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////
+// Variables: Colors
+////////////////////////////////////////////////////////
+$color-primary:          #02bfe7;
+$color-primary-dark:     #00a6d2;
+$color-primary-darkest:  #046b99;
+$color-primary-light:    #9bdaf1;
+$color-primary-lightest: #e1f3f8;
+
+
+$black:                #000;
+$color-black:                #000;
+$black-transparent-50: rgba(0, 0, 0, 0.5);
+
+$white:             #FFF;
+$color-white:             #FFF;
+$white-transparent-50: rgba(255, 255, 255, 0.5);
+
+$transparent: rgba(255, 255, 255, 0);
+
+$color-gray:       #808080;
+
+$text-color:        $black;
+
+$color-link:        $black;
+$color-link-hover:  darken($black, 4%);
+
+$form-text-color:   $black;
+
+$border-color:      #ccc;
+$disabled-gray:     #cfcfcf;
+
+$color-gray-disabled:     #cfcfcf;
+
+$color-alert-error:   #ED1C24;
+$color-alert-success:   #0AD58B;
+
+// -------------------------------------------------
+// FORMS
+// -------------------------------------------------
+$color-form-border: $color-primary;
+$color-form-border-active: $color-primary;
+$color-form-border-disabled: $color-gray-disabled;
+$color-form-border-error: $color-alert-error;
+$color-form-border-success: $color-alert-success;

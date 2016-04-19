@@ -1,0 +1,148 @@
+// _layout.scss
+
+.page-wrapper {
+  @include outer-container();
+}
+
+.wrapper {
+  padding: 0 1rem;
+}
+
+// All inner-*** will have this padding applied.
+div[class^='inner-'], div[class*=' inner-'],
+ul[class^='inner-'], ul[class*=' inner-'] {
+  padding: 0 1rem;
+}
+
+// ==============================================
+// Page Sections
+// ==============================================
+.page-section {
+  @include outer-container();
+  padding: 4rem 0;
+  text-align: center;
+
+  &.full-bleed {
+    width: 100%;
+  }
+}
+
+.section-light {
+  background: $color-gray;
+  color: $color-white;
+}
+
+.section-dark {
+  background: $color-black;
+  color: $color-white;
+}
+
+// ==============================================
+// Grid
+// ==============================================
+.grid-header {
+  @include outer-container();
+  padding: 1rem 0 0 0;
+
+  .grid-header-title {
+    margin: 0;
+  }
+}
+
+.grid-container {
+  @include outer-container();
+
+  .grid-items {
+    width: 100%;
+    display: inline-block;
+  }
+
+  .grid-item {
+    width: 100%;
+    display: block;
+    text-decoration: none;
+
+    img {
+      width: 100%;
+    }
+
+    @media #{$medium-only} {
+      @include span-columns(6);
+    }
+
+    @media #{$large-only} {
+      @include span-columns(4);
+    }
+
+    @media #{$xlarge-up} {
+      @include span-columns(3);
+    }
+  }
+
+  .grid-item-pricing {
+
+  }
+
+  h4 {
+    display: block;
+    float: left;
+  }
+
+  .sale-price {
+    color: blue;
+    padding-right: 1rem;
+  }
+
+  .regular-price {
+    text-decoration: line-through;
+  }
+
+
+}
+
+
+// ==============================================
+// Grid - Auto Width Items
+// ==============================================
+.grid-items {
+  padding: 2rem 0;
+
+  .grid-item__auto-width {
+    width: 100%;
+
+    img {
+      width: 100%;
+    }
+  }
+
+  @media #{$medium-up} {
+    /* one item */
+    .grid-item__auto-width:first-child:nth-last-child(1) {
+      width: 100%;
+    }
+
+    /* two items */
+    .grid-item__auto-width:first-child:nth-last-child(2),
+    .grid-item__auto-width:first-child:nth-last-child(2) ~ .grid-item__auto-width {
+      @include span-columns(6);
+    }
+
+    /* three items */
+    .grid-item__auto-width:first-child:nth-last-child(3),
+    .grid-item__auto-width:first-child:nth-last-child(3) ~ .grid-item__auto-width {
+      @include span-columns(4);
+    }
+  }
+
+  @media #{$xlarge-up} {
+    /* four items */
+    .grid-item__auto-width:first-child:nth-last-child(4),
+    .grid-item__auto-width:first-child:nth-last-child(4) ~ .grid-item__auto-width {
+      @include span-columns(3);
+    }
+  }
+
+  .grid-item__auto-width:last-of-type {
+    margin-right: 0;
+  }
+}

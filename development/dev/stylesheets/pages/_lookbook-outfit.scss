@@ -1,0 +1,219 @@
+// lookbook-outfit.scss
+
+.lookbook-outfit {
+  @include outer-container();
+  margin-bottom: 4rem;
+
+  .outfit-title {
+    text-align: center;
+    color: $color-primary;
+  }
+
+  .outfit-price {
+    text-align: center;
+  }
+
+  .form-actions {
+    text-align: center;
+  }
+}
+
+.outfit-items {
+  max-width: 48rem;
+  margin: 0 auto 6rem;
+  margin: 0 auto 6rem;
+  @include clearfix();
+}
+
+.outfit-item {
+  @include span-columns(4 of 12);
+
+  .outfit-item-image {
+    margin-bottom: 1rem;
+    width: 100%;
+    height: auto;
+  }
+
+  .outfit-item-title {
+    text-align: center;
+  }
+}
+
+.cart-content {
+  width: 100%;
+  display: inline-block;
+  background: $color-primary;
+  padding: 4rem 2rem;
+  text-align: center;
+
+  .cart-title {
+    color: $color-white;
+  }
+
+  a, span {
+    color: $color-white;
+    letter-spacing: 1px;
+  }
+
+  .cart-item-wrapper {
+    width: 150px;
+    display: inline-block;
+    margin-right: 2rem;
+
+    &:last-of-type {
+      margin-right: 0;
+    }
+  }
+
+  h5 {
+    color: $color-white;
+  }
+
+  img {
+    max-width: 100%;
+  }
+}
+
+
+.cart-ajax-items {
+  padding: 2rem 0;
+  opacity: 0;
+  @include transition(opacity 0.5s ease-in);
+
+  &.loaded {
+    opacity: 1;
+  }
+
+  .group {
+    width: 400px;
+    display: block;
+    margin: 0 auto 2rem;
+    @include clearfix();
+
+    img {
+      width: 50%;
+      height: auto;
+      float: left;
+    }
+
+    .group-info {
+      text-align: left;
+      float: right;
+      width: 50%;
+      padding-left: 1rem;
+    }
+
+    .info {
+      display: block;
+      float: left;
+    }
+
+    .item-link {
+      display: block;
+      float: left;
+    }
+  }
+
+  .item-count {
+    .increment, .item-count-number {
+      display: inline-block;
+      float: left;
+      margin: 0 1rem 0 0;
+      padding: 6px 8px;
+      line-height: 10px;
+      cursor: pointer;
+      border: 1px solid $color-white;
+      color: $color-white;
+    }
+
+    .increment:last-of-type {
+      margin-right: 0;
+    }
+  }
+}
+
+.cart-link {
+  opacity: 1;
+  animation: fadeInLoad 0.5s;
+
+  &.loading {
+    opacity: 0;
+  }
+}
+
+@keyframes fadeInLoad {
+  from {
+    opacity:0;
+  }
+  to {
+    opacity:1;
+  }
+}
+
+.cart-loading {
+  height: 0px;
+  opacity: 0;
+  visibility: hidden;
+  margin-top: 2rem;
+  @include transition(opacity 0.25s ease-out);
+
+  &.visible {
+    opacity: 1;
+    visibility: visible;
+    height: auto;
+  }
+
+  svg {
+    -webkit-animation-name: spin;
+    -webkit-animation-duration: 2000ms;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+    -moz-animation-name: spin;
+    -moz-animation-duration: 2000ms;
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-timing-function: linear;
+    -ms-animation-name: spin;
+    -ms-animation-duration: 2000ms;
+    -ms-animation-iteration-count: infinite;
+    -ms-animation-timing-function: linear;
+
+    animation-name: spin;
+    animation-duration: 2000ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+  }
+
+  @-ms-keyframes spin {
+    from { -ms-transform: rotate(0deg); }
+    to { -ms-transform: rotate(360deg); }
+  }
+
+  @-moz-keyframes spin {
+    from { -moz-transform: rotate(0deg); }
+    to { -moz-transform: rotate(360deg); }
+  }
+
+  @-webkit-keyframes spin {
+    from { -webkit-transform: rotate(0deg); }
+    to { -webkit-transform: rotate(360deg); }
+  }
+
+  @keyframes spin {
+    from {
+      transform:rotate(0deg);
+    }
+    to {
+      transform:rotate(360deg);
+    }
+  }
+
+  svg {
+    rect {
+      fill: $color-white;
+
+      &.bk {
+        fill: $color-primary;
+      }
+    }
+  }
+}

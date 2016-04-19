@@ -1,0 +1,17 @@
+// index.scss
+
+.home-hero-slider {
+  @include outer-container();
+
+  .slides {
+    display: inline-block;
+  }
+
+  li {
+    width: 100%;
+
+    img {
+      width: 100%;
+    }
+  }
+}

@@ -1,0 +1,31 @@
+// components.scss
+
+
+////////////////////////////////////////////////////////
+// Components
+////////////////////////////////////////////////////////
+
+// -----------------------------------------------------
+// Component: Icons
+// -----------------------------------------------------
+.icon {
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+
+// -----------------------------------------------------
+// Component: Hero Primary
+// -----------------------------------------------------
+.hero-primary {
+  background: $color-black;
+  color: $color-white;
+  height: 400px;
+  position: relative;
+  text-align: center;
+  margin-bottom: 4rem;
+
+  .hero-headline {
+    @include vertical-align();
+  }
+}
