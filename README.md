@@ -34,6 +34,20 @@ Getting Started
 
 This will compile the SCSS and JS into the folder for use in the theme.
 
+Staging Folder
+---------------
+
+To build the staging folder type...
+
+```grunt staging```
+
+Production Folder
+---------------
+
+To build the production folder type...
+
+```grunt production```
+
 Basic structure
 ---------------
 ```
