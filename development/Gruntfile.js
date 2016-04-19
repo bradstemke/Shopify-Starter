@@ -29,6 +29,14 @@ module.exports = function(grunt) {
         files: {
           'assets/style.css.liquid' : 'dev/stylesheets/style.scss'
         }
+      },
+      build_staging: {
+        options: {
+          style: 'compressed'
+        },
+        files: {
+          '../staging/assets/style.css.liquid' : 'dev/stylesheets/style.scss'
+        }
       }
     },
 
@@ -83,6 +91,26 @@ module.exports = function(grunt) {
             dest: 'assets'
           }
         ]
+      },
+      images_staging: {
+        files: [
+          {
+            expand: true,
+            cwd: 'dev/images/',
+            src: ['**/*.{png,jpg,svg,jpeg}'],
+            dest: '../staging/assets/'
+          }
+        ]
+      },
+      fonts_staging: {
+        files: [
+          {
+            expand: true,
+            cwd: 'dev/fonts/',
+            src: ['**/*'],
+            dest: '../staging/assets/'
+          }
+        ]
       }
     },
 
@@ -94,6 +122,14 @@ module.exports = function(grunt) {
       build_plugins: {
         src: 'dev/scripts/plugins.js',
         dest: 'assets/plugins.js'
+      },
+      build_staging_application: {
+        src: 'dev/scripts/application.js',
+        dest: '../staging/assets/application.js',
+      },
+      build_staging_plugins: {
+        src: 'dev/scripts/plugins.js',
+        dest: '../staging/assets/plugins.js'
       }
     },
 
@@ -112,6 +148,7 @@ module.exports = function(grunt) {
   }); // END grunt.initConfig
 
   // Load the plugins
+  grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-contrib-uglify');
@@ -127,6 +164,16 @@ module.exports = function(grunt) {
     'uglify:build_application',
     'copy:modernizr',
     'copy:svg'
+  ]);
+
+  // Staging Folder
+  grunt.registerTask('staging', [
+    'sass:build_staging',
+    'concat:plugins',
+    'uglify:build_staging_plugins',
+    'uglify:build_staging_application',
+    'copy:images_staging',
+    'copy:fonts_staging'
   ]);
 
 };
