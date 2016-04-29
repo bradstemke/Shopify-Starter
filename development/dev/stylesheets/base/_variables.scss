@@ -14,38 +14,39 @@ $color-primary-light:    #9bdaf1;
 $color-primary-lightest: #e1f3f8;
 
 
-$black:                #000;
-$color-black:                #000;
-$black-transparent-50: rgba(0, 0, 0, 0.5);
+$black:                  #000000;
+$color-black:            #000000;
+$black-transparent-50:   rgba(0, 0, 0, 0.5);
 
-$white:             #FFF;
-$color-white:             #FFF;
-$white-transparent-50: rgba(255, 255, 255, 0.5);
+$white:                  #FFFFFF;
+$color-white:            #FFFFFF;
+$white-transparent-50:   rgba(255, 255, 255, 0.5);
 
-$transparent: rgba(255, 255, 255, 0);
+$transparent:            rgba(255, 255, 255, 0);
 
-$color-gray:       #808080;
+$color-gray:             #808080;
+$color-gray-light:       #CCCCCC;
 
-$text-color:        $black;
+$text-color:             $color-black;
 
-$color-link:        $black;
-$color-link-hover:  darken($black, 4%);
+$color-link:             $color-black;
+$color-link-hover:       darken($color-black, 4%);
 
-$form-text-color:   $black;
+$form-text-color:        $color-black;
 
-$border-color:      #ccc;
-$disabled-gray:     #cfcfcf;
+$border-color:           $color-gray-light;
+$disabled-gray:          $color-gray-light;
 
-$color-gray-disabled:     #cfcfcf;
+$color-gray-disabled:    $color-gray-light;
 
-$color-alert-error:   #ED1C24;
-$color-alert-success:   #0AD58B;
+$color-alert-error:      #ED1C24;
+$color-alert-success:    #0AD58B;
 
 // -------------------------------------------------
 // FORMS
 // -------------------------------------------------
-$color-form-border: $color-primary;
-$color-form-border-active: $color-primary;
+$color-form-border:          $color-primary;
+$color-form-border-active:   $color-primary;
 $color-form-border-disabled: $color-gray-disabled;
-$color-form-border-error: $color-alert-error;
-$color-form-border-success: $color-alert-success;
+$color-form-border-error:    $color-alert-error;
+$color-form-border-success:  $color-alert-success;

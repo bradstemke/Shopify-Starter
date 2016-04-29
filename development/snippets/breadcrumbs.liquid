@@ -1,0 +1,49 @@
+{% unless template == 'index' or template == 'cart' %}
+<div class="breadcrumb">
+  <a href="/" title="Back to the frontpage">Home</a>
+
+  {% if template contains 'product' %}
+
+    {% if collection %}
+      <span>»</span>
+      {% if collection.handle %}
+         {% capture url %}/collections/{{ collection.handle }}{% endcapture %}
+         {{ collection.title | link_to: url }}
+      {% endif %}
+    {% endif %}
+    <span>»</span>
+    <span>{{ product.title }}</span>
+
+  {% elsif template contains 'collection' and collection.handle %}
+
+    {% if current_tags %}
+      <span>»</span>
+      {% capture url %}/collections/{{ collection.handle }}{% endcapture %}
+      {{ collection.title | link_to: url }}
+      <span>»</span>
+      <span>{{ current_tags.first }}</span>
+    {% else %}
+      <span>»</span>
+      <span>{{ collection.title }}</span>
+    {% endif %}
+
+  {% elsif template == 'article' %}
+
+    <span>»</span>
+    {{ blog.title | link_to: blog.url }}
+    <span>»</span>
+    <span>{{ article.title }}</span>
+
+  {% elsif template contains 'page' %}
+
+   <span>»</span>
+   <span>{{ page.title }}</span>
+
+  {% else %}
+
+   <span>»</span>
+   <span>{{ page_title }}</span>
+
+  {% endif %}
+</div>
+{% endunless %}

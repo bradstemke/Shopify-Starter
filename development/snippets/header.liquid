@@ -1,67 +1,48 @@
-    <header class="row">
+    <header class="header-wrapper">
+      <div class="header-inner">
 
-      <div class="social-links half column left-aligned">
-      {% include 'social-links' %}
-      </div>
+        <div class="header-main-links">
+          {% include 'site-nav' %}
+        </div> <!-- header-main-links -->
 
-      <div class="half column right-aligned">
-
-        <div class="cart-link">
-          <a href="/cart"><img src="{{ 'cart.svg' | asset_url }}" /> {{ cart.item_count }} {{ cart.item_count | pluralize: 'item', 'items' }} ({{ cart.total_price | money }})</a>
-        </div>
-
-        {% if shop.customer_accounts_enabled %}
-        <div class="customer-links">
-          {% if customer %}
-            Logged in as <a href="/account">{{ customer.first_name }}</a> · {{ 'Log out' | customer_logout_link }}
-          {% else %}
-            {{ 'Log in' | customer_login_link }}
-            {% if shop.customer_accounts_optional %}
-            or {{ 'Create an account' | customer_register_link }}
-            {% endif %}
+        <div class="header-logo-wrapper">
+          <a id="logo" class="header-logo" href="/">
+            {% comment %}{{ 'logo.png' | asset_url }}{% endcomment %}
+          </a>
+          {% if template == 'index' %}
+          {% comment %}
+            Many SEO audit tools look for a h1 tag on the home page. Let's give 'em one.
+            Other pages should use the resource name as h1 tag. For example, on the product
+            page, the product title will use a h1 tag.
+          {% endcomment %}
+          <h1 class="hide-text">{{ shop.name }}</h1>
           {% endif %}
-        </div>
-        {% endif %}
+        </div> <!-- header-logo -->
 
-      </div>
+        <div class="header-secondary-links">
 
-      <div class="masthead full column clear centered" role="banner">
-        {% if settings.use_logo %}
-        <a id="logo" href="/">
-          {{ 'logo.png' | asset_url | img_tag: shop.name }}
-        </a>
-        {% else %}
-        <a id="site-title" href="/">
-          {{ shop.name }}
-        </a>
-        {% endif %}
-        {% if template == 'index' %}
-        {% comment %}
-          Many SEO audit tools look for a h1 tag on the home page. Let's give 'em one.
-          Other pages should use the resource name as h1 tag. For example, on the product
-          page, the product title will use a h1 tag.
-        {% endcomment %}
-        <h1 class="hidden">{{ shop.name }}</h1>
-        {% endif %}
-      </div>
+          {% if settings.header_note %}
+            <h5>{{ settings.header_note }}</h5>
+          {% endif%}
 
-      <div class="clear full column">
+          <div class="cart-link">
+            <a href="/cart"><img src="{{ 'cart.svg' | asset_url }}" /> {{ cart.item_count }} {{ cart.item_count | pluralize: 'item', 'items' }} ({{ cart.total_price | money }})</a>
+          </div>
 
-        {% comment %}
-          Main Navigation
-        {% endcomment %}
-        {% include 'site-nav' %}
+          {% if shop.customer_accounts_enabled %}
+          <div class="customer-links">
+            {% if customer %}
+              Logged in as <a href="/account">{{ customer.first_name }}</a> · {{ 'Log out' | customer_logout_link }}
+            {% else %}
+              {{ 'Log in' | customer_login_link }}
+              {% if shop.customer_accounts_optional %}
+              or {{ 'Create an account' | customer_register_link }}
+              {% endif %}
+            {% endif %}
+          </div>
+          {% endif %}
 
-        {% comment %}
-          IE8 and IE9 don't support the HTML5 placeholder attribute, so it's a good idea to use JavaScript
-          to show and hide the placeholder text.
-          Have a look in assets/shop.js.liquid to see sample JavaScript for this.
-        {% endcomment %}
-        <form action="/search" method="get" class="search-form right" role="search">
-          <input name="q" type="search" id="search-field" placeholder="Search store..." value="{{ search.terms | escape }}" />
-          <input type="submit" id="search-submit" value="Search" />
-        </form>
+        </div> <!-- header-secondary -->
 
-      </div>
-
-    </header>
+      </div> <!-- header-inner -->
+    </header> <!-- header -->
