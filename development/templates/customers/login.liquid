@@ -1,0 +1,99 @@
+<div class="page page-account page-account-login">
+
+  <h1 class="page-title">Your Account.</h1>
+
+  <div class="account-login">
+    <div id="customer">
+      <h2 class="form-header">Existing Customers</h2>
+
+      {% form 'customer_login' %}
+        {{ form.errors | default_errors }}
+        <div class="form-group">
+          <label for="customer_email">Email</label>
+          <input type="email" value="" placeholder="Email Address" name="customer[email]" id="customer_email">
+        </div>
+        {% if form.password_needed %}
+        <div class="form-group">
+          <label for="customer_password">Password</label>
+          <input type="password" value="" placeholder="Password" name="customer[password]" id="customer_password">
+        </div>
+        {% endif %}
+        <div class="form-group">
+          <input type="submit" value="Log in" class="btn btn-inverse">
+        </div>
+        <div class="form-group">
+          <button class="btn-gray-text" onclick="showRecoverPasswordForm(); return false;">Forgot Your Password?</button>
+        </div>
+      {% endform %}
+    </div>
+
+    <div id="recover-password" style='display:none'>
+      <h2 class="form-header">Reset Password</h2>
+      <p class="account-note">An email will be sent to reset your password.</p>
+
+      {% form 'recover_customer_password' %}
+        {{ form.errors | default_errors }}
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" value="" placeholder="Email Address" name="email" id="recover-email"/>
+        </div>
+        <div class="form-group">
+          <input class="btn btn-inverse" type="submit" value="Submit" />
+        </div>
+        <div class="form-group">
+          <button class="btn-gray-text" onclick="hideRecoverPasswordForm();return false;">Cancel</a>
+        </div>
+      {% endform %}
+    </div>
+  </div>
+
+  <div class="account-register">
+    <h2 class="form-header">New Customers</h2>
+
+    {% form 'create_customer' %}
+      {{ form.errors | default_errors }}
+      <div class="form-group">
+        <label for="first_name">First Name</label>
+        <input type="text" value="" placeholder="First Name" name="customer[first_name]" id="first_name">
+      </div>
+      <div class="form-group">
+        <label for="last_name">Last Name</label>
+        <input type="text" placeholder="Last Name" name="customer[last_name]" id="last_name">
+      </div>
+      <div class="form-group">
+        <label form="email">Email</label>
+        <input type="email" value="" placeholder="Email Address" name="customer[email]" id="email">
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" value="" placeholder="Password" name="customer[password]" id="password">
+      </div>
+      <div class="form-group">
+        <input type="submit" value="Create Account" class="btn btn-inverse">
+      </div>
+    {% endform %}
+
+    {% if shop.checkout.guest_login %}
+      {% form 'guest_login' %}
+        <div class="form-group">
+          <input class="btn btn-ghost" type="submit" value="Continue as Guest" id="guest_login" />
+        </div>
+      {% endform %}
+    {% endif %}
+  </div>
+
+</div>
+
+<script type="text/javascript">
+  function showRecoverPasswordForm() {
+    document.getElementById('recover-password').style.display = 'block';
+    document.getElementById('customer').style.display='none';
+  }
+
+  function hideRecoverPasswordForm() {
+    document.getElementById('recover-password').style.display = 'none';
+    document.getElementById('customer').style.display = 'block';
+  }
+
+  if (window.location.hash == '#recover') { showRecoverPasswordForm() }
+</script>

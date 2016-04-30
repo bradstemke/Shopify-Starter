@@ -22,11 +22,11 @@
         <div class="header-secondary-links">
 
           {% if settings.header_note %}
-            <h5>{{ settings.header_note }}</h5>
+            <h6 class="header-note">{{ settings.header_note }}</h6>
           {% endif%}
 
           <div class="cart-link">
-            <a href="/cart"><img src="{{ 'cart.svg' | asset_url }}" /> {{ cart.item_count }} {{ cart.item_count | pluralize: 'item', 'items' }} ({{ cart.total_price | money }})</a>
+            <a href="/cart">Bag ({{ cart.item_count }}) {% comment %}{{ cart.item_count | pluralize: 'item', 'items' }}{% endcomment %} {% comment %}({{ cart.total_price | money }}){% endcomment %}</a>
           </div>
 
           {% if shop.customer_accounts_enabled %}

@@ -24,6 +24,7 @@
   margin-left: -100px;
   margin-right: auto;
   margin-top: 25px;
+
   .header-logo {
     background: pink;
     height: 50px;
@@ -37,4 +38,21 @@
   float: right;
   display: inline-block;
   @include vertical-align();
+
+  .header-note {
+    display: inline-block;
+    line-height: 50px;
+    padding-right: 2rem;
+  }
+
+  .cart-link {
+    display: inline-block;
+    float: right;
+    padding: 1rem 0.5rem;
+    background: $color-white;
+
+    a {
+      text-decoration: none;
+    }
+  }
 }

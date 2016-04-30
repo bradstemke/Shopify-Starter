@@ -161,6 +161,18 @@
          "label": "Header Note"
       },
       {
+          "type": "checkbox",
+          "id": "show_banner",
+          "default": true,
+          "label": "Show Top Banner?"
+      },
+      {
+         "type": "text",
+         "id": "banner_message",
+         "default": "Your Message Here",
+         "label": "Banner Message"
+      },
+      {
         "type": "header",
         "content": "Social links"
       },

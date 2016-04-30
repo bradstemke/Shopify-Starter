@@ -1,0 +1,77 @@
+<div class="page page-account">
+
+  {% include 'account-sidebar_user' %}
+
+  <div class="account-content">
+
+    <div class="address-details">
+      <h3 class="detail-header">Profile</h3>
+      {% if customer.default_address %}
+        <p>{{ customer.default_address.first_name }} {{ customer.default_address.last_name }}</p>
+        <p>{{ customer.default_address.address1 }}</p>
+        {% if customer.default_address.address2 != "" %}
+          <p>{{ customer.default_address.address2 }}</p>
+        {% endif %}
+        <p>{{ customer.default_address.city}} {% if customer.default_address.province_code %}, {{ customer.default_address.province_code }}{% endif %} {{ customer.default_address.zip }}</p>
+      {% endif %}
+      <a href="/account/addresses">Address Book</a>
+    </div>
+
+    <div class="account-header">
+      <h1 class="page-header">Order History</h1>
+
+      <a href="account/logout">Log Out</a>
+    </div>
+
+    <div class="account-details-orders">
+      {% if customer.orders.size != 0 %}
+      <table class="orders-table">
+        <thead>
+          <tr>
+            <th class="order-number">Order #</th>
+            <th class="order-date">Date</th>
+            <th class="order-total">Total</th>
+            <th class="order-status">Payment Status</th>
+            <th class="order-actions">Shipping Status</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="height: 16px;"></tr>
+          {% for order in customer.orders %}
+          <tr class="order">
+            <td class="order-number">{{ order.order_name }}</td>
+            <td class="order-date">{{ order.created_at | date: "%D" }}</td>
+            <td class="order-total">${{ order.total_price | money_without_currency }}</td>
+            <td class="order-status">
+              <span class="status-label">
+                {% if order.cancelled %}
+                Cancelled
+                {% else %}
+                {{ order.financial_status }} / {{ order.fulfillment_status }}
+                {% endif %}
+              </span>
+            </td>
+            <td class="order-shipping-status">
+              {% if order.cancelled %}
+              <span class="status-label">Cancelled</span>
+              {% else %}
+              {{ order.fulfillment_status | replace: 'unfulfilled', 'Awaiting Shipment' | replace: 'fulfilled', 'Shipped' }}
+              {% endif %}
+
+              {% for tracking_url in fulfillment.tracking_urls %}
+                <a href="{{ tracking_url }}">(View Tracking Info)</a>
+              {% endfor %}
+            </td>
+            <td class="order-actions"><a href="{{ order.customer_url }}" class="status-label">View Details</a></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% else %}
+      <h2>You have not placed any orders.</h2>
+      {% endif %}
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,141 @@
+<div class="page page-account page-account-order">
+
+  {% include 'account-sidebar_user' %}
+
+  <div class="account-content">
+
+    <div class="account-order-header">
+      <a href="/account" class="btn-back btn-gray-text">Back</a>
+
+      <div class="header-row">
+        <h1 class="header-title">Order {{ order.name }}</h1>
+        <h2 class="order-date">{{ order.created_at | date: "%D" }}</h2>
+      </div>
+    </div> <!-- account-order-header -->
+
+    <div class="account-order-details">
+
+      <div class="order-details-header">
+        <h5>Items</h5>
+      </div>
+
+      <div class="order-items">
+        {% for line_item in order.line_items %}
+
+        {% assign titleSplit = line_item.title | split: '-' %}
+        {% assign title = titleSplit[0] %}
+        {% assign size = titleSplit[1] | remove_first: " " %}
+
+        {% include 'wh_calculate_discount' with line_item.product %}
+        {% include 'wh_variant' with line_item.variant %}
+
+        <div class="order-item">
+          <div class="order-item-image">
+            <a href="{{ item.product.url }}">
+              <img src="{{ line_item.product.featured_image.src | product_img_url: 'compact' }}" alt="{{ line_item.title | escape }}" />
+            </a>
+          </div>
+          <div class="order-item-details">
+            <a class="order-item-title" href="{{ line_item.product.url }}">{{ title }}</a>
+            <div class="order-item-option">
+              <h5 class="option-label">Size</h5>
+              <h4 class="option-info">{{ line_item.variant.option1 }}</h4>
+            </div>
+            <div class="order-item-option">
+              <h5 class="option-label">Price</h5>
+              {% if wh_discount_value == 1 %}
+                <h4 class="option-info">${{ line_item.price | money_without_currency | remove: '.00' }}</h4>
+              {% else %}
+                <h4 class="option-info">${{ line_item.price | times: wh_discount_value | money_without_currency | remove: '.00'}}</h4>
+              {% endif %}
+            </div>
+          </div>
+        </div> <!-- .cart-item -->
+
+        {% endfor %}
+
+      </div> <!-- order-items -->
+
+      <div class="order-footer">
+        <div class="order-totals footer-section">
+          <h5 class="secondary-title">Overview</h5>
+
+          <div class="totals">
+            <h5>Subtotal</h5>
+            <h4>${{ order.subtotal_price | money_without_currency | remove: '.00' }}</h4>
+          </div>
+
+          {% if order.discounts.size > 0 %}
+          <div class="totals">
+            <h5>Discount</h5>
+            <h4>{% for discount in order.discounts %}${{ discount.savings | money_without_currency }}<br />({{ discount.code }}){% endfor %}</h4>
+          </div>
+          {% endif %}
+
+          <div class="totals">
+            <h5>Tax</h5>
+            {% if tax_line.price == null %}
+            <h4>$0.00</h4>
+            {% else %}
+            <h4>{% for tax_line in order.tax_lines %}${{ tax_line.price | money_without_currency }}{% endfor %}</h4>
+            {% endif %}
+          </div>
+
+          <div class="totals">
+            <h5>Shipping</h5>
+            <h4>{% for shipping_method in order.shipping_methods %}${{ shipping_method.price | money_without_currency }}{% endfor %}</h4>
+          </div>
+
+          <div class="totals">
+            <h5>Total</h5>
+            <h4>${{ order.total_price | money_without_currency }}</h4>
+          </div>
+        </div>
+
+        <div class="order-shipping-info footer-section">
+          <h5 class="secondary-title">Shipping Info</h5>
+          <p>{{ order.shipping_address.name }}</p>
+          <p>{{ order.shipping_address.company }}</p>
+          <p>{{ order.shipping_address.street }}</p>
+          <p>{{ order.shipping_address.city }}, {{ order.shipping_address.province_code }} {{ order.billing_address.zip }}</p>
+          <p>{{ order.shipping_address.country }}</p>
+          <p>{{ order.shipping_address.phone }}</p>
+
+          {% if tracking_number == null %}
+          {% else %}
+          <div class="sub-section">
+            <p>Shipped via UPS:</p>
+            {% for tracking_number in order.fulfillment.tracking_numbers %}
+              {% for tracking_url in order.fulfillment.tracking_urls %}
+                <a href="{{ tracking_url }}">{{ order.fulfillment.tracking_number }} View Tracking Info</a>
+              {% endfor %}
+            {% endfor %}
+          </div>
+          {% endif %}
+        </div>
+
+        <div class="order-billing-info footer-section">
+          <h5 class="secondary-title">Billing Info</h5>
+          <p>{{ order.billing_address.name }}</p>
+          <p>{{ order.billing_address.company }}</p>
+          <p>{{ order.billing_address.street }}</p>
+          <p>{{ order.billing_address.city }}, {{ order.billing_address.province_code }} {{ order.billing_address.zip }}</p>
+          <p>{{ order.billing_address.country }}</p>
+          <p>{{ order.billing_address.phone }}</p>
+
+          <div class="sub-section">
+              {% if order.payment_details.credit_card_number %}
+                <p>Paid via:</p>
+                <h4>{{ order.payment_details.credit_card_number }}</h4>
+                <h4>{{ order.payment_details.credit_card_company }}</h4>
+              {% endif %}
+
+          </div>
+        </div>
+      </div> <!-- order-footer -->
+
+    </div> <!-- account-order-details -->
+
+  </div> <!-- account-content -->
+
+</div> <!-- .page -->

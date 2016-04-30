@@ -29,3 +29,13 @@
     @include vertical-align();
   }
 }
+
+// -----------------------------------------------------
+// Component: Top Banner
+// -----------------------------------------------------
+.top-banner {
+  padding: 0.5rem 1rem;
+  text-align: center;
+  background: $color-black;
+  color: $color-white;
+}

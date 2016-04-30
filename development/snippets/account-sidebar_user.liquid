@@ -1,0 +1,14 @@
+  <div class="account-sidebar">
+    <div class="sidebar-section sidebar-user">
+      <div class="sidebar-user-header">
+        <h5>Hello, {{ customer.first_name }}!</h5>
+        <a href="account/logout" class="logout-btn">Log Out</a>
+      </div>
+
+      <div class="account-nav">
+        <a href="/account/" class="{% if template == 'customers/account' %}active{% endif %}">Order History</a>
+        <a href="/account/addresses" class="{% if template == 'customers/addresses' %}active{% endif %}">My Addresses</a>
+        <a href="/account/logout" class="{% if template == 'customers/logout' %}active{% endif %}">Logout</a>
+      </div>
+    </div>
+  </div>

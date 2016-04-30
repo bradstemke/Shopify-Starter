@@ -2,6 +2,7 @@
 
 .main-nav {
   background: $color-white;
+  padding: 1rem 0.5rem;
 }
 
 .inner-nav {
@@ -10,6 +11,14 @@
   .nav-item {
     display: inline-block;
     margin-right: 1rem;
+
+    a {
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
 
     &.last {
       margin-right: 0;
